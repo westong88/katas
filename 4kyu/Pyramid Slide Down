@@ -1,0 +1,17 @@
+import numpy
+def longest_slide_down(pyramid):
+    ls = numpy.empty(shape = (len(pyramid) + 1, len(pyramid) + 2), dtype = 'object')
+    x = check(pyramid, 0, 0, ls)
+    return x
+    
+def check(pyramid, n, a, ls):
+    if ls[n][a] != None:
+        return ls[n][a]
+    if n == len(pyramid):
+        result = 0
+    else:
+        tmp1 = pyramid[n][a] + check(pyramid, n + 1, a, ls)
+        tmp2 = pyramid[n][a] + check(pyramid, n + 1, a + 1, ls)
+        result = max(tmp1, tmp2)
+    ls[n][a] = result
+    return result
